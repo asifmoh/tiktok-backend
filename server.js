@@ -10,11 +10,16 @@ const port = 9000;
 
 // middlewares
 app.use(express.json());
+app.use((req, res, next)=>{
 
+res.setHeaders("Access-Control-Allow-Origin", "*"),
+res.setHeader("Access-Control-Allow-Headers", "*"),
+next();
+});
 
 
 // DB config
-const connection_url = 'mongodb+srv://<ID>@cluster0.qma34.mongodb.net/tiktok?retryWrites=true&w=majority';
+const connection_url = 'mongodb+srv://asifmohDCI:019349255@cluster0.qma34.mongodb.net/tiktok?retryWrites=true&w=majority';
 
 mongoose.connect(connection_url, {
 useNewUrlParser: true,
