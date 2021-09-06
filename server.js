@@ -13,9 +13,8 @@ app.use(express.json());
 
 
 
-
 // DB config
-const connection_url = 'mongodb+srv://asifmohDCI:019349255@cluster0.qma34.mongodb.net/tiktok?retryWrites=true&w=majority';
+const connection_url = 'mongodb+srv://<ID>@cluster0.qma34.mongodb.net/tiktok?retryWrites=true&w=majority';
 
 mongoose.connect(connection_url, {
 useNewUrlParser: true,
@@ -29,6 +28,17 @@ app.get("/", (req, res)=> res.status(200).send("Hello Asif"));
 
 app.get("/v1/posts", (req, res)=> res.status(200).send(Data));
 
+app.get("/v2/posts", (req, res)=>
+{
+Videos.find((err, data)=>{
+    if (err) {
+        res.status(500).send(err);
+    } else {
+        res.status(200).send(data);
+    }
+});
+});
+
 app.get("/v2/posts", (req, res)=> {
     const dbVideos = req.body;
     Videos.create(dbVideos, (err, data)=>{
@@ -38,8 +48,6 @@ app.get("/v2/posts", (req, res)=> {
             res.status(201).send(data);
         }
     });
-
-
 });
 
 
