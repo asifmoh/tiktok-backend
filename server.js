@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+
 import Data from "./data.js";
 import Videos from './dbModel.js';
 
@@ -30,7 +31,6 @@ app.get("/v1/posts", (req, res)=> res.status(200).send(Data));
 
 app.get("/v2/posts", (req, res)=> {
     const dbVideos = req.body;
-
     Videos.create(dbVideos, (err, data)=>{
         if (err) {
             res.status(500).send(err);
